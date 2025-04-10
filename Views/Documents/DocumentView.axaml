@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="snakeql.Views.Documents.DocumentView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:snakeql.ViewModels.Documents"
+             xmlns:AvalonEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+             xmlns:editing="using:AvaloniaEdit.Editing"
+             mc:Ignorable="d"
+             d:DesignWidth="300" d:DesignHeight="400"
+             x:DataType="vm:DocumentViewModel" x:CompileBindings="True"
+             >
+  <Grid Focusable="True">
+    <StackPanel Name="StatusBar" Background="Purple" Height="25" DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <TextBlock Name="StatusText" Text="Ready" Margin="5 0 0 0" VerticalAlignment="Center" FontSize="12"/>
+        </StackPanel>
+    
+    <AvalonEdit:TextEditor Name="Editor"
+                               FontFamily="Cascadia Code,Consolas,Menlo,Monospace"
+                               HorizontalScrollBarVisibility="Auto"
+                               VerticalScrollBarVisibility="Visible"
+                               FontWeight="Light"
+                               FontSize="16"     
+                               Background="Red"
+                           
+                               >
+    
+      <AvalonEdit:TextEditor.ContextFlyout>
+            <MenuFlyout>
+                <MenuItem Header="Copy" InputGesture="ctrl+C" Command="{Binding CopyMouseCommand}" CommandParameter="{Binding #Editor.TextArea}"></MenuItem>
+                <MenuItem Header="Cut" InputGesture="ctrl+X" Command="{Binding CutMouseCommand}" CommandParameter="{Binding #Editor.TextArea}"></MenuItem>
+                <MenuItem Header="Paste" InputGesture="ctrl+V" Command="{Binding PasteMouseCommand}"  CommandParameter="{Binding #Editor.TextArea}"></MenuItem>
+                <MenuItem Header="-"/>
+                <MenuItem Header="Select All" InputGesture="ctrl+A" Command="{Binding SelectAllMouseCommand}" CommandParameter="{Binding #Editor.TextArea}"></MenuItem>
+            </MenuFlyout>
+      </AvalonEdit:TextEditor.ContextFlyout>
+    
+      
+      <AvalonEdit:TextEditor.Styles>
+         <Style Selector="editing|LineNumberMargin">
+              <Setter Property="MinWidth" Value="3" />
+        </Style>
+      </AvalonEdit:TextEditor.Styles>
+      
+    </AvalonEdit:TextEditor>
+
+       
+  </Grid>
+</UserControl>
